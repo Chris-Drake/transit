@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">AKL Transit</string>
+
+    <string name="home_title">@string/app_name</string>
+    <string name="home_change_journey">Change journey</string>
+    <string name="home_occupancy_empty">Empty</string>
+    <string name="home_occupancy_many_available">Many available seats</string>
+    <string name="home_occupancy_few_available">Few available seats</string>
+    <string name="home_occupancy_standing_room">Standing room only</string>
+    <string name="home_occupancy_full">FULL</string>
+    <string name="home_departure_status_scheduled">Scheduled</string>
+    <string name="home_departure_status_cancelled">Cancelled</string>
+    <string name="home_departure_status_departed">Departed</string>
+    <string name="home_journey_next">Next</string>
+
+    <string name="journey_settings_title">Settings</string>
+    <string name="journey_settings_back">Back</string>
+    <string name="journey_settings_journey_outbound">Outbound</string>
+    <string name="journey_settings_journey_inbound">Inbound</string>
+</resources>

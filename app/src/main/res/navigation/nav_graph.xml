@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/destination_home">
+
+    <fragment
+        android:id="@+id/destination_home"
+        android:name="nz.co.chrisdrake.transit.ui.home.HomeFragment"
+        tools:layout="@layout/home_fragment">
+
+        <action
+            android:id="@+id/action_map_to_settings"
+            app:destination="@id/destination_settings" />
+
+        <action
+            android:id="@+id/action_map_to_tracker"
+            app:destination="@id/destination_tracker" />
+    </fragment>
+
+    <activity
+        android:id="@+id/destination_settings"
+        android:name="nz.co.chrisdrake.transit.ui.settings.JourneySettingsActivity"
+        android:label="@string/journey_settings_title" />
+
+    <activity
+        android:id="@+id/destination_tracker"
+        android:name="nz.co.chrisdrake.transit.ui.tracker.TrackerActivity">
+
+        <argument
+            android:name="tripId"
+            app:argType="nz.co.chrisdrake.transit.domain.static_.TripId" />
+        <argument
+            android:name="routeId"
+            app:argType="nz.co.chrisdrake.transit.domain.static_.RouteId" />
+        <argument
+            android:name="initialPosition"
+            app:argType="com.google.android.gms.maps.model.LatLng" />
+    </activity>
+</navigation>
