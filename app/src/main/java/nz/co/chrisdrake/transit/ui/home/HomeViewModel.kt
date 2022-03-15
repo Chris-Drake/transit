@@ -36,6 +36,7 @@ import nz.co.chrisdrake.transit.ui.map.MapViewState
 import nz.co.chrisdrake.transit.ui.map.VehicleMarker
 import nz.co.chrisdrake.transit.ui.map.toRouteMarker
 import java.time.ZoneId
+import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 
 class HomeViewModel(
@@ -90,10 +91,11 @@ class HomeViewModel(
         val journeyId = journey.hashCode()
 
         _viewState.update {
-            val mapState = if (it.journeyId == journeyId) {
-                it.map.copy(vehicleMarkers = emptyList())
-            } else {
-                it.map.copy(
+            val shouldExpireRealtimeData =
+                it.journeyId != journeyId || ZonedDateTime.now().minusMinutes(1).isAfter(it.updated)
+
+            val mapState = when {
+                it.journeyId != journeyId -> it.map.copy(
                     routeMarker = null,
                     vehicleMarkers = emptyList(),
                     animateCameraUpdate = AnimateCameraUpdate(
@@ -101,6 +103,8 @@ class HomeViewModel(
                         ::onCameraUpdate
                     )
                 )
+                shouldExpireRealtimeData -> it.map.copy(vehicleMarkers = emptyList())
+                else -> it.map
             }
 
             it.copy(
@@ -108,7 +112,7 @@ class HomeViewModel(
                 title = journey.title,
                 nextJourneyEnabled = nextJourney != journey,
                 toggleDirectionEnabled = true,
-                departures = emptyList(),
+                departures = if (shouldExpireRealtimeData) emptyList() else it.departures,
                 map = mapState,
                 error = null,
                 onClickNextJourney = { selectedJourney.update { nextJourney } },

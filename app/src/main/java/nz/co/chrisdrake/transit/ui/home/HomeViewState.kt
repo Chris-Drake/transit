@@ -2,6 +2,7 @@ package nz.co.chrisdrake.transit.ui.home
 
 import nz.co.chrisdrake.transit.ui.departures.DepartureListItem
 import nz.co.chrisdrake.transit.ui.map.MapViewState
+import java.time.ZonedDateTime
 
 data class HomeViewState(
     val journeyId: Any? = null,
@@ -14,4 +15,6 @@ data class HomeViewState(
     val error: String? = null,
     val onClickNextJourney: () -> Unit = {},
     val onClickToggleDirection: () -> Unit,
-)
+) {
+    val updated: ZonedDateTime = ZonedDateTime.now()
+}
