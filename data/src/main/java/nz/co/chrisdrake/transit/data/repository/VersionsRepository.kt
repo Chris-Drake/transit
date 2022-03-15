@@ -25,6 +25,7 @@ class VersionsRepository internal constructor(
                 ?.takeIf { dao.populated(it) }
                 ?.let { return@withContext it }
 
+            dao.deleteVersions()
             dao.insertVersions(apiService.versions().data)
 
             val currentVersion = checkNotNull(dao.currentVersion())

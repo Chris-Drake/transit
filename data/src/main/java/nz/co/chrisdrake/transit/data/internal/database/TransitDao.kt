@@ -75,6 +75,9 @@ internal interface TransitDao {
     @Query("SELECT (EXISTS(SELECT * FROM routes WHERE id LIKE '%' || :version) AND EXISTS(SELECT * FROM stops WHERE id LIKE '%' || :version) AND EXISTS(SELECT * FROM trips WHERE id LIKE '%' || :version) AND EXISTS(SELECT * FROM calendar WHERE service_id LIKE '%' || :version))")
     suspend fun populated(version: Version): Boolean
 
+    @Query("DELETE FROM versions")
+    suspend fun deleteVersions()
+
     @Query("DELETE FROM trips")
     suspend fun deleteTrips()
 
