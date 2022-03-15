@@ -63,6 +63,7 @@ dependencies {
     implementation(Libraries.AndroidX.Lifecycle.lifecycles)
     implementation(Libraries.AndroidX.Compose.activity)
     implementation(Libraries.AndroidX.Compose.material)
+    implementation(Libraries.AndroidX.Compose.runtime)
     implementation(Libraries.AndroidX.Compose.tooling)
     implementation(Libraries.AndroidX.Compose.Accompanist.insets)
     implementation(Libraries.AndroidX.Compose.Accompanist.systemUiController)

@@ -22,6 +22,7 @@ object Versions {
         val activity = "1.4.0"
         val compiler = "1.1.1"
         val material = "1.1.1"
+        val runtime = "1.2.0-alpha03" // Compatibility with https://github.com/googlemaps/android-maps-compose/blob/main/build.gradle#L4
         val tooling = "1.1.1"
     }
 }
@@ -61,6 +62,7 @@ object Libraries {
             val activity = "androidx.activity:activity-compose:${Versions.Compose.activity}"
             val material = "androidx.compose.material:material:${Versions.Compose.material}"
             val tooling = "androidx.compose.ui:ui-tooling:${Versions.Compose.tooling}"
+            val runtime = "androidx.compose.runtime:runtime:${Versions.Compose.runtime}"
 
             object Accompanist {
                 val insets = "com.google.accompanist:accompanist-insets:${Versions.Compose.accompanist}"
@@ -73,7 +75,7 @@ object Libraries {
         val maps = "com.google.android.gms:play-services-maps:18.0.2"
     }
 
-    val mapsCompose = "com.google.maps.android:maps-compose:1.2.0"
+    val mapsCompose = "com.google.maps.android:maps-compose:1.3.1"
 
     object Firebase {
         val bom = "com.google.firebase:firebase-bom:29.0.4"

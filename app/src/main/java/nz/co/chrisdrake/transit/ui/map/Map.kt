@@ -6,14 +6,10 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleEventObserver
 import com.google.android.gms.maps.CameraUpdate
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
 import com.google.maps.android.compose.*
 import kotlinx.coroutines.launch
 import nz.co.chrisdrake.transit.R
@@ -96,24 +92,6 @@ private fun VehicleMarkers(
 
     val icon = BitmapDescriptorFactory.fromResource(R.drawable.ic_map_marker_vehicle)
 
-    val lifecycleOwner = LocalLifecycleOwner.current
-
-    var activeMarker: Marker? by remember { mutableStateOf(null) }
-
-    DisposableEffect(lifecycleOwner) {
-        val observer = LifecycleEventObserver { _, event ->
-            if (event == Lifecycle.Event.ON_STOP) {
-                activeMarker?.hideInfoWindow()
-            }
-        }
-
-        lifecycleOwner.lifecycle.addObserver(observer)
-
-        onDispose {
-            lifecycleOwner.lifecycle.removeObserver(observer)
-        }
-    }
-
     vehicleMarkers.forEachIndexed { index, marker ->
         val targetPosition = marker.position
         val tripId = marker.tripDescriptor.tripId
@@ -145,10 +123,6 @@ private fun VehicleMarkers(
                 title = marker.title,
                 snippet = marker.snippet?.let { stringResource(id = it) },
                 zIndex = 1f + index,
-                onClick = {
-                    activeMarker = it
-                    false
-                },
                 onInfoWindowClick = {
                     onInfoWindowClick(marker, it.position)
                     it.hideInfoWindow()
